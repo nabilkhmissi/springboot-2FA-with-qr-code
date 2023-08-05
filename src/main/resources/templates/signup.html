@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <div th:replace="~{fragments/head :: head}"></div>
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: header}"></div>
+<div class="container py-2">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-12 g-2">
+            <div class="card p-5">
+                <div>
+                    <h3>Register</h3>
+                </div>
+                <form th:object="${user}" th:action="@{/register}" method="post">
+                    <div class="form-group mb-3">
+                        <input class="form-control" type="text" th:field="*{name}" placeholder="name">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input class="form-control" type="text" th:field="*{email}" placeholder="email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input class="form-control " type="text" th:field="*{password}" placeholder="password">
+                    </div>
+                    <div class="form-group mb-2">
+                        <input class="btn btn-primary w-100" type="submit" value="Submit">
+                    </div>
+                    <div class="form-group mb-2">
+                        <a class="btn btn-outline-secondary  w-100" href="/login">Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

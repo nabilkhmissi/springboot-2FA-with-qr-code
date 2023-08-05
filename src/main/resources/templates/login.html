@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <div th:replace="fragments/head :: head"></div>
+</head>
+<body>
+<div th:replace="fragments/navbar :: header"></div>
+<div class="container py-3">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-12 g-2">
+            <div class="card p-5 text-center">
+                <div class="py-2">
+                    <h3>Login</h3>
+                </div>
+                <div class="p-2 my-2 alert alert-success" th:if="${signup_success != null}">
+                    <div th:text="${signup_success}"></div>
+                </div>
+                <div class="p-2 my-2 alert alert-info" th:if="${signup_success == null}">
+                    <div>For test : Email : user@mail.com - password = user</div>
+                </div>
+                <form th:action="@{/login}" method="post">
+                    <div class="alert alert-danger" th:if="${param.error}">
+                        Invalid email/password, please try again
+                    </div>
+                    <div class="form-group mb-3">
+                        <input class="form-control" type="text" name="username" placeholder="email">
+                    </div>
+                    <div class="form-group mb-3">
+                        <input class="form-control" type="password" name="password" placeholder="password">
+                    </div>
+                    <div class="form-group mb-2">
+                        <input class="btn btn-primary w-100 " type="submit" value="Login">
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-outline-secondary w-100" href="/register">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
