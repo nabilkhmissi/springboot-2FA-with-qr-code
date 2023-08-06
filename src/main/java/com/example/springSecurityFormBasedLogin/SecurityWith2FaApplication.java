@@ -27,7 +27,9 @@ public class SecurityWith2FaApplication {
 					"user@mail.com",
 					passwordEncoder.encode("user"),
 					"ROLE_USER",
-					"local"));
+					"local",
+					false,
+					null));
 		};
 	}
 
