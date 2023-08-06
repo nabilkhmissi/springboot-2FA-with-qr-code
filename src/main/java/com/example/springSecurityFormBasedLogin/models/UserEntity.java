@@ -25,6 +25,8 @@ public class UserEntity {
     private String password;
     private String authorities;
     private String providers;
+    private boolean two_factor_enabled;
+    private String two_factor_secret;
 
 
     public List<String> extractAuthorities(){
