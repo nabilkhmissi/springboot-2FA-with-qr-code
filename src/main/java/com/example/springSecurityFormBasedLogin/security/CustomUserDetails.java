@@ -11,6 +11,13 @@ public class CustomUserDetails implements UserDetails {
 
     private UserEntity user;
 
+    public boolean isTwoFactorEnabled(){
+        return user.isTwo_factor_enabled();
+    }
+
+    public String getTwoFactorSecret(){
+        return user.getTwo_factor_secret();
+    }
     public CustomUserDetails(UserEntity user) {
         this.user = user;
     }
@@ -49,4 +56,5 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
