@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <div th:replace="~{fragments/head :: head}"></div>
+</head>
+<body>
+<div th:replace="fragments/navbar :: header"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="row">
+                <h5>Personal infos :</h5>
+                <hr>
+                <table class="table table-striped">
+
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">NAME</th>
+                        <th scope="col">EMAIL</th>
+                        <th scope="col">PROVIDERS</th>
+                        <th scope="col">AUTHORITIES</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:object="${authenticatedUser}">
+                        <td th:text="*{id}"></td>
+                        <td th:text="*{name}"></td>
+                        <td th:text="*{email}"></td>
+                        <td th:text="*{providers}"></td>
+                        <td th:text="*{authorities}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <h5>Security</h5>
+                <hr>
+                <div class="col-md-6">
+                    <p>2-Factor authentication : ( <span
+                            th:text="${authenticatedUser.two_factor_enabled ? 'enabled' : 'not enabled'}"></span> )
+                    </p>
+                    <a class="btn btn-primary" th:href="@{/users/profile/mfa(enable=true)}"
+                       th:if="${!authenticatedUser.two_factor_enabled}">Enable 2-Factor authentication</a>
+                    <a class="btn btn-primary" th:href="@{/users/profile/mfa(enable=false)}"
+                       th:if="${authenticatedUser.two_factor_enabled}">Disable 2 Factor authentication</a>
+                </div>
+                <div class="col-md-6 px-2" th:if="${twoFactorModel != null}">
+                    <div class="alert alert-success my-2" th:if="${success_code}" th:text="${success_code}"></div>
+                    <div class="alert alert-info my-2 text-center">
+                        <div class="alert alert-danger" th:if="${wrong_code}" th:text="${wrong_code}"></div>
+                        <img class="w-50" th:src="${twoFactorModel.qrCode}"/>
+                        <p th:text="${twoFactorModel.secret}"></p>
+                        <form th:action="@{/users/profile/enable-two-factor}" method="post"
+                              th:object="${twoFactorModel}">
+                            <input class="form-control mb-2" placeholder="put the generated code here !"
+                                   th:field="*{generatedCode}">
+                            <input type="hidden" th:field="*{activeUserEmail}">
+                            <input type="hidden" th:field="*{secret}">
+                            <input type="hidden" th:field="*{qrCode}">
+                            <input class="btn btn-success w-100" type="submit" value="Submit"></input>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
