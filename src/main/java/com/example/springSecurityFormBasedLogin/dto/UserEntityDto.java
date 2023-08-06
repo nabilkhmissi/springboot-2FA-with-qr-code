@@ -14,6 +14,7 @@ public class UserEntityDto {
     private String email;
     private String providers;
     private String authorities;
+    private boolean two_factor_enabled;
 
     public static UserEntityDto fromEntity(UserEntity userEntity){
         return UserEntityDto.builder()
@@ -22,6 +23,7 @@ public class UserEntityDto {
                 .email(userEntity.getEmail())
                 .providers(userEntity.getProviders())
                 .authorities(userEntity.getAuthorities())
+                .two_factor_enabled(userEntity.isTwo_factor_enabled())
                 .build();
     }
 }
