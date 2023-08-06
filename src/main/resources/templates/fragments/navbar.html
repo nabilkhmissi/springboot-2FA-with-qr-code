@@ -26,7 +26,7 @@
                 </ul>
                 <div class="d-flex" >
                     <div sec:authorize="isAuthenticated()">
-                        <a th:href="@{/profile}" sec:authentication="name" class="btn btn-light"></a>
+                        <a th:href="@{/users/profile}" sec:authentication="name" class="btn btn-light"></a>
                         <a href="logout" class="btn btn-danger">Logout</a>
                     </div>
                     <div sec:authorize="!isAuthenticated()">
